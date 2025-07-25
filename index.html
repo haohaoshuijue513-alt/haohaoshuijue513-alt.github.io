@@ -125,11 +125,28 @@
             .projects { flex-direction: column; align-items: center; }
         }
     </style>
+    <script>
+        function handleAvatarChange(event) {
+            const file = event.target.files[0];
+            if (file && file.type.startsWith('image/')) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('avatar-img').src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+        function triggerAvatarInput() {
+            document.getElementById('avatar-input').click();
+        }
+    </script>
 </head>
 <body>
     <div class="container">
-        <img src="https://avatars.githubusercontent.com/u/9919?v=4" alt="头像" class="avatar">
+        <input type="file" id="avatar-input" accept="image/*" style="display:none" onchange="handleAvatarChange(event)">
+        <img src="https://avatars.githubusercontent.com/u/9919?v=4" alt="头像" class="avatar" id="avatar-img" title="点击更换头像" onclick="triggerAvatarInput()" style="cursor:pointer;">
         <h1>你好，颜雨乐！</h1>
+        <p style="text-align:center; color:#888; font-size:15px; margin-top:-10px;">（点击头像可更换图片，仅本地预览）</p>
         <p style="text-align:center; margin-bottom:28px;">欢迎来到我的个人主页。我是一名热爱编程与设计的学生，喜欢探索新技术，乐于分享和交流。</p>
 
         <h2>个人简介</h2>
